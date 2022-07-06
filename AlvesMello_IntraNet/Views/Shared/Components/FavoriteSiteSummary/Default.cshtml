@@ -4,6 +4,8 @@
 {
 	<a class="nav-link px-2 text-white" asp-controller="FavoriteSite" asp-action="Index">
 		<img class="bi d-block mx-auto mb-1" width="24" height="24" src="~/images/Favorite.ico" />
-		@Model.FavoriteSite.FavoriteUserSites.Count
+		<div style="display: flex; justify-content: center;">
+			@Model.FavoriteSite.FavoriteUserSites.Count
+		</div>
 	</a>
 }
