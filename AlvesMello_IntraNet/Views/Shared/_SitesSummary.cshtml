@@ -1,0 +1,27 @@
+﻿@model Site
+
+<div class="col-sm-4 col-md-4 col-lg-4">
+	<a href="@Model.SiteUrl">
+		<p><img src="@Model.ImageUrl" class="img-fluid" /></p>
+	</a>
+
+	<h4>
+		<a asp-controller="Site" asp-action="Details" asp-route-siteId="@Model.SiteId">@Model.Name</a>
+	</h4>
+
+	<h5>
+		<button class="btn" style="background-color: #@Model.Category.Color; color: white">
+			@Model.Category.Name
+		</button>
+	</h5>
+
+	<p>@Model.Description</p>
+
+	<div>
+		<p class="button">
+			<a class="btn btn-primary" id="favButton" asp-controller="FavoriteSite" asp-action="AddSiteToFavoriteSite" asp-route-siteId="@Model.SiteId">
+				Incluir aos Favoritos
+			</a>
+		</p>
+	</div>
+</div>

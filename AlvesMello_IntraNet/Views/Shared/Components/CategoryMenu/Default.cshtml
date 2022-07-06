@@ -1,0 +1,20 @@
+﻿<div class="dropdown">
+	<a class="btn btn-secondary dropdown-toggle" role="button" id="ddmbCategory" data-bs-toggle="dropdown" aria-expanded="false">
+		<img class="bi d-block mx-auto mb-1" width="24" height="24" src="~/images/Site.png"/>
+		Sites
+	</a>
+
+	<ul class="dropdown-menu">
+		@foreach (var category in Model)
+		{
+			<li>
+				<a class="dropdown-item" asp-controller="Site" asp-action="List" asp-route-category="@category.Name">@category.Name</a>
+			</li>
+		}
+		<li class="dropdown-divider" />
+
+		<li>
+			<a class="dropdown-item" asp-controller="Site" asp-action="List" asp-route-category="">Todos os Sites</a>
+		</li>
+	</ul>
+</div>
