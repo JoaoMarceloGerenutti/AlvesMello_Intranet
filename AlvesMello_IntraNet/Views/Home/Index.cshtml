@@ -1,0 +1,12 @@
+﻿@model HomeViewModel
+
+<partial name="_Carousel"/>
+<br />
+<h2>Sites mais usados</h2>
+
+<div class="row">
+	@foreach (var site in Model.FavoriteSites)
+	{
+		<partial name="_SitesSummary" for="@site" />
+	}
+</div>
