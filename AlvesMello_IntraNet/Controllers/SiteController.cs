@@ -51,5 +51,37 @@ namespace AlvesMello_IntraNet.Controllers
 
             return View(site);
 		}
+
+        public ViewResult Search(string searchString)
+        {
+            IEnumerable<Site> sites;
+            string currentCategory = string.Empty;
+
+            if (string.IsNullOrEmpty(searchString))
+            {
+                sites = _siteRepository.Sites.OrderBy(s => s.SiteId);
+                currentCategory = "Todos os Sites";
+            }
+            else
+            {
+                sites = _siteRepository.Sites
+                        .Where(s => s.Name.ToLower().Contains(searchString.ToLower())
+                );
+
+                if (sites.Any())
+                {
+                    currentCategory = "Sites";
+                }
+                else
+                {
+                    currentCategory = "Nenhum Site foi Encontrado!";
+                }
+            }
+            return View("~/Views/Site/List.cshtml", new SiteListViewModel
+            {
+                Sites = sites,
+                CurrentCategory = currentCategory
+            });
+        }
     }
 }

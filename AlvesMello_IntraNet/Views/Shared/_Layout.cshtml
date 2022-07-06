@@ -37,8 +37,8 @@
 					</li>
 				</ul>
 
-				<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-					<input type="search" class="form-control form-control-dark" placeholder="Procurar..." aria-label="Search">
+				<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" asp-controller="Site" asp-action="Search" method="get">
+					<input type="search" class="form-control form-control-dark" placeholder="Procurar Site" name="searchString" value="@ViewData["searchString"]" aria-label="Search">
 				</form>
 
 				<div class="text-end">
