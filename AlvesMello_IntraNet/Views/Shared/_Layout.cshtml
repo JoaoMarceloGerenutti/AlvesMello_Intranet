@@ -27,9 +27,6 @@
 						@await Component.InvokeAsync("CategoryMenu")
 					</li>
 					<li>
-						@await Component.InvokeAsync("FavoriteSiteSummary")
-					</li>
-					<li>
 						<a class="nav-link px-2 text-white" asp-area="" asp-controller="Contact" asp-action="Index">
 							<img class="bi d-block mx-auto mb-1" width="24" height="24" src="~/images/SendEmail.png"/>
 							Contato
@@ -41,10 +38,7 @@
 					<input type="search" class="form-control form-control-dark" placeholder="Procurar Site" name="searchString" value="@ViewData["searchString"]" aria-label="Search">
 				</form>
 
-				<div class="text-end">
-					<button type="button" class="btn btn-outline-light me-2">Entrar</button>
-					<button type="button" class="btn btn-warning">Cadastrar-se</button>
-				</div>
+				@await Html.PartialAsync("_LoginPartial")
 			</div>
 		</div>
 	</header>

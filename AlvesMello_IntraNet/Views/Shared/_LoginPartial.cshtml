@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+	<div class="dropdown text-end">
+		<a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+			<img src="https://github.com/mdo.png" alt="mdo" width="48" height="48" class="rounded-circle">
+		</a>
+		<ul class="dropdown-menu dropdown-menu-start text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
+			<li>@await Component.InvokeAsync("FavoriteSiteSummary")</li>
+			<li><a class="dropdown-item text-light">Configurações</a></li>
+			<li><a class="dropdown-item text-light">Perfil</a></li>
+			<li><hr class="dropdown-divider text-light"></li>
+
+			<form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
+				<li><button class="dropdown-item text-light" type="submit">Sair</button></li>
+			</form>
+		</ul>
+	</div>
+}
+else
+{
+	<div>
+		<a type="button" class="btn btn-outline-light me-2" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@string.Format("{0}{1}", Context.Request.Path, Context.Request.QueryString)">Entrar</a>
+		<a type="button" class="btn btn-warning" asp-controller="Account" asp-action="Register">Cadastrar-se</a>
+	</div>
+}

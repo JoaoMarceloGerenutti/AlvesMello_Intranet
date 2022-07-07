@@ -1,0 +1,82 @@
+﻿@model LoginViewModel
+
+<section class="vh-100" style="background-color: #7A160E;">
+	<div class="container py-5 h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col col-xl-10">
+				<div class="card" style="border-radius: 1rem;">
+					<div class="row g-0">
+						<div class="col-md-6 col-lg-5 d-none d-md-block">
+							<img src="~/images/LoginBanner.png"
+								 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+						</div>
+						<div class="col-md-6 col-lg-7 d-flex align-items-center">
+							<div class="card-body p-4 p-lg-5 text-black">
+
+								<form asp-controller="Account" asp-action="Login" method="post" role="form">
+									<div class="d-flex align-items-center mb-3 pb-1">
+										<img src="~/images/A&M.png" style="width: 64px; height: 64px; border-radius: 1rem" />
+										<span class="h1 fw-bold mb-0" style="padding-left: 1rem">Alves & Mello</span>
+									</div>
+
+									<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Entrar na sua Conta</h5>
+
+									<div asp-validation-summary="All" class="text-danger"></div>
+									<input type="hidden" asp-for="ReturnUrl" />
+
+									<div class="form-outline mb-4">
+										<label asp-for="UserName" class="form-label">E-mail</label>
+										<input asp-for="UserName" class="form-control form-control-lg" />
+										<span asp-validation-for="UserName" class="text-danger"></span>
+									</div>
+
+									<div class="form-outline mb-4">
+										<label asp-for="Password" class="form-label">Senha</label>
+										<input asp-for="Password" class="form-control form-control-lg" />
+										<span asp-validation-for="Password" class="text-danger"></span>
+									</div>
+
+									<div class="pt-1 mb-4">
+										<button class="btn btn-dark btn-lg btn-block" type="submit">Entrar</button>
+									</div>
+
+									<a class="small text-muted" href="#!">Esqueceu a Senha?</a>
+
+									<p class="mb-5 pb-lg-2" style="color: #393f81;">
+										Não tem uma Conta? <a asp-controller="Account" asp-action="Register"
+															  style="color: #393f81;">Registrar-se</a>
+									</p>
+
+									<div style="display: grid; justify-items: center;">
+										<div class="row">
+											<a href="#!" class="small text-muted">Termos de uso</a>
+										</div>
+										<br />
+
+										<div class="row">
+											<a href="#!" class="small text-muted">Política de Privacidade</a>
+										</div>
+									</div>
+								</form>
+
+								<script>
+									var password = document.getElementById("password");
+
+									function validatePassword() {
+										if (password.value != null) {
+											password.setCustomValidity("Informe a Senha!");
+										} else {
+											password.setCustomValidity('');
+										}
+									}
+
+									password.onchange = validatePassword;
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
