@@ -5,18 +5,39 @@
 @if (SignInManager.IsSignedIn(User))
 {
 	<div class="dropdown text-end">
-		<a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		<a class="d-block link-light text-decoration-none dropdown-menu-start dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
 			<img src="https://github.com/mdo.png" alt="mdo" width="48" height="48" class="rounded-circle">
 		</a>
-		<ul class="dropdown-menu dropdown-menu-start text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
-			<li>@await Component.InvokeAsync("FavoriteSiteSummary")</li>
-			<li><a class="dropdown-item text-light">Configurações</a></li>
-			<li><a class="dropdown-item text-light">Perfil</a></li>
+		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
+			<li class="text-center"><div class="text-light p-3 pb-0">Nome do Usuário</div></li>
+			<li class="text-center"><div class="text-light p-3 pt-0 align-middle">Cargo</div></li>
+
 			<li><hr class="dropdown-divider text-light"></li>
 
-			<form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
-				<li><button class="dropdown-item text-light" type="submit">Sair</button></li>
-			</form>
+			<li>@await Component.InvokeAsync("FavoriteSiteSummary")</li>
+
+			<li>
+				<a class="dropdown-item text-light" asp-controller="" asp-action="">
+					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Configuration.png" />
+					Configurações
+				</a>
+			</li>
+
+			<li>
+				<a class="dropdown-item text-light" asp-controller="" asp-action="">
+					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Profile.png" />
+					Perfil
+				</a>
+			</li>
+
+			<li><hr class="dropdown-divider text-light"></li>
+
+			<li>
+				<form class="dropdown-item text-light d-flex align-items-center" asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
+					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Logout.png" />
+					<button class="dropdown-item text-light" type="submit">Sair</button>
+				</form>
+			</li>
 		</ul>
 	</div>
 }
