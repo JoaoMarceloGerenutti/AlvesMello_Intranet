@@ -2,6 +2,7 @@
 using AlvesMello_IntraNet.Models;
 using AlvesMello_IntraNet.Repositories;
 using AlvesMello_IntraNet.Repositories.Interfaces;
+using AlvesMello_IntraNet.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,17 @@ public class Startup
 
         services.AddTransient<ISiteRepository, SiteRepository>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Admin",
+                policy =>
+                {
+                    policy.RequireRole("Admin");
+                });
+        });
+
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped(sp => FavoriteSite.GetFavorite(sp));
 
@@ -47,7 +59,8 @@ public class Startup
         services.AddSession();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app,
+        IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
     {
         if (env.IsDevelopment())
         {
@@ -63,6 +76,9 @@ public class Startup
 
         app.UseRouting();
 
+        seedUserRoleInitial.SeedRoles();
+        seedUserRoleInitial.SeedUsers();
+
         app.UseSession();
 
         app.UseAuthentication();
@@ -70,6 +86,11 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+            );
+
             endpoints.MapControllerRoute(
                 name: "filterCategory",
                 pattern: "Site/{action}/{category?}",

@@ -1,54 +1,55 @@
 ﻿using AlvesMello_IntraNet.Models;
 using AlvesMello_IntraNet.Repositories.Interfaces;
 using AlvesMello_IntraNet.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AlvesMello_IntraNet.Controllers
+namespace AlvesMello_IntraNet.Controllers;
+
+[Authorize]
+public class FavoriteSiteController : Controller
 {
-    public class FavoriteSiteController : Controller
+    private readonly ISiteRepository _siteRepository;
+    private readonly FavoriteSite _favoriteSite;
+
+    public FavoriteSiteController(ISiteRepository siteRepository, FavoriteSite favoriteSite)
     {
-        private readonly ISiteRepository _siteRepository;
-        private readonly FavoriteSite _favoriteSite;
+        _siteRepository = siteRepository;
+        _favoriteSite = favoriteSite;
+    }
 
-        public FavoriteSiteController(ISiteRepository siteRepository, FavoriteSite favoriteSite)
+    public IActionResult Index()
+    {
+        var sites = _favoriteSite.GetFavoriteUserSites();
+        _favoriteSite.FavoriteUserSites = sites;
+
+        var favoriteSiteVM = new FavoriteSiteViewModel
         {
-            _siteRepository = siteRepository;
-            _favoriteSite = favoriteSite;
-        }
+            FavoriteSite = _favoriteSite
+        };
 
-        public IActionResult Index()
+        return View(favoriteSiteVM);
+    }
+
+    public IActionResult AddSiteToFavoriteSite(int siteId)
+    {
+        var selectedSite = _siteRepository.Sites
+                            .FirstOrDefault(s => s.SiteId == siteId);
+        if (selectedSite != null)
         {
-            var sites = _favoriteSite.GetFavoriteUserSites();
-            _favoriteSite.FavoriteUserSites = sites;
-
-            var favoriteSiteVM = new FavoriteSiteViewModel
-            {
-                FavoriteSite = _favoriteSite
-            };
-
-            return View(favoriteSiteVM);
+            _favoriteSite.AddToFavorite(selectedSite);
         }
+        return RedirectToAction("Index");
+    }
 
-        public IActionResult AddSiteToFavoriteSite(int siteId)
+    public IActionResult RemoveSiteFromFavoriteSite(int siteId)
+    {
+        var selectedSite = _siteRepository.Sites
+                            .FirstOrDefault(s => s.SiteId == siteId);
+        if (selectedSite != null)
         {
-            var selectedSite = _siteRepository.Sites
-                                .FirstOrDefault(s => s.SiteId == siteId);
-            if (selectedSite != null)
-            {
-                _favoriteSite.AddToFavorite(selectedSite);
-            }
-            return RedirectToAction("Index");
+            _favoriteSite.RemoveFromFavorite(selectedSite);
         }
-
-        public IActionResult RemoveSiteFromFavoriteSite(int siteId)
-        {
-            var selectedSite = _siteRepository.Sites
-                                .FirstOrDefault(s => s.SiteId == siteId);
-            if (selectedSite != null)
-            {
-                _favoriteSite.RemoveFromFavorite(selectedSite);
-            }
-            return RedirectToAction("Index");
-        }
+        return RedirectToAction("Index");
     }
 }
