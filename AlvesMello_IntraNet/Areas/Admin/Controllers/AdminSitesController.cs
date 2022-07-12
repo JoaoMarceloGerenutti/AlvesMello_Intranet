@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AlvesMello_IntraNet.Context;
 using AlvesMello_IntraNet.Models;
 using Microsoft.AspNetCore.Authorization;
+using ReflectionIT.Mvc.Paging;
 
 namespace AlvesMello_IntraNet.Areas.Admin.Controllers
 {
@@ -23,10 +24,18 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminSites
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filter, int pagindex = 1, string sort = "Name")
         {
-            var appDbContext = _context.Sites.Include(s => s.Category);
-            return View(await appDbContext.ToListAsync());
+            var result = _context.Sites.Include(s => s.Category).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                result = result.Where(p => p.Name.Contains(filter));
+            }
+
+            var model = await PagingList.CreateAsync(result, 5, pagindex, sort, "Name");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            return View(model);
         }
 
         // GET: Admin/AdminSites/Details/5
@@ -51,7 +60,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         // GET: Admin/AdminSites/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Color");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
             return View();
         }
 
@@ -68,7 +77,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Color", site.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", site.CategoryId);
             return View(site);
         }
 
@@ -85,7 +94,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Color", site.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", site.CategoryId);
             return View(site);
         }
 
@@ -121,7 +130,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Color", site.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", site.CategoryId);
             return View(site);
         }
 

@@ -36,5 +36,7 @@ public class Site
     public bool IsActive { get; set; }
 
     public int CategoryId { get; set; }
+
+    [Display(Name = "Categorias")]
     public virtual Category Category { get; set; }
 }

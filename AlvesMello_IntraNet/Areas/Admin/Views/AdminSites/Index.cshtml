@@ -1,71 +1,115 @@
-﻿@model IEnumerable<AlvesMello_IntraNet.Models.Site>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<AlvesMello_IntraNet.Models.Site>
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Sites</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SiteUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFavorite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SiteUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFavorite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Color)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SiteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SiteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SiteId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<form method="get" class="form-inline">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"> Nome <span class="caret"></span></button>
+
+						<ul class="dropdown-menu">
+							<li>
+								<a>Nome</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="form-group col-9">
+						<input type="text" class="form-control" maxlength="100">
+					</div>
+
+					<div class="input-group-btn">
+						<button type="submit" class="btn btn-danger">
+							<image src="/images/Search.png"></image>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<div>
+	<vc:pager paging-list="@Model"></vc:pager>
+</div>
+
+<div class="row">
+	<div class="col-md-10">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.ImageUrl)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Name)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.SiteUrl)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.IsFavorite)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.IsActive)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Category)
+					</th>
+					<th>
+						
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							<image class="img-thumbnail" src="@item.ImageUrl" />
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Name)
+						</td>
+						<td>
+							<a href="@item.SiteUrl">@item.SiteUrl</a>
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.IsFavorite)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.IsActive)
+						</td>
+						<td style="color: #@item.Category.Color">
+							@Html.DisplayFor(modelItem => item.Category.Name)
+						</td>
+						<td class="d-flex flex-wrap justify-content-center">
+							<a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.SiteId">Editar</a>
+							<a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.SiteId">Detalhes</a>
+							<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.SiteId">Deletar</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+		<div class="row">
+			<div class="col-6">
+				<a class="btn btn-success" asp-action="Create">
+					Criar Site
+				</a>
+			</div>
+
+			<div class="col-6 d-flex justify-content-end">
+				Total de Sites: @Model.TotalRecordCount
+			</div>
+		</div>
+	</div>
+</div>

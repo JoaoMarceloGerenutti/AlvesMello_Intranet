@@ -5,6 +5,7 @@ using AlvesMello_IntraNet.Repositories.Interfaces;
 using AlvesMello_IntraNet.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 namespace AlvesMello_IntraNet;
 
@@ -54,6 +55,12 @@ public class Startup
         services.AddScoped(sp => FavoriteSite.GetFavorite(sp));
 
         services.AddControllersWithViews();
+
+        services.AddPaging(options =>
+        {
+            options.ViewName = "Bootstrap4";
+            options.PageParameterName = "pageindex";
+        });
 
         services.AddMemoryCache();
         services.AddSession();
