@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AlvesMello_IntraNet.Context;
 using AlvesMello_IntraNet.Models;
 using Microsoft.AspNetCore.Authorization;
+using ReflectionIT.Mvc.Paging;
 
 namespace AlvesMello_IntraNet.Areas.Admin.Controllers
 {
@@ -23,9 +24,19 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminCategories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filter, int pagindex = 1, string sort = "Name")
         {
-              return View(await _context.Categories.ToListAsync());
+            var result = _context.Categories
+                    .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                result = result.Where(p => p.Name.Contains(filter));
+            }
+
+            var model = await PagingList.CreateAsync(result, 5, pagindex, sort, "Name");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            return View(model);
         }
 
         // GET: Admin/AdminCategories/Details/5

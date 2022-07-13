@@ -9,8 +9,8 @@
 			<img src="https://github.com/mdo.png" alt="mdo" width="48" height="48" class="rounded-circle">
 		</a>
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
-			<li class="text-center"><div class="text-light p-3 pb-0">Nome do Usuário</div></li>
-			<li class="text-center"><div class="text-light p-3 pt-0 align-middle">Cargo</div></li>
+			<br />
+			<li class="text-center"><div class="text-light p-3 pt-0 align-middle">@User.Identity.Name</div></li>
 
 			<li><hr class="dropdown-divider text-light"></li>
 
@@ -48,3 +48,9 @@ else
 		<a type="button" class="btn btn-warning" asp-controller="Account" asp-action="Register">Cadastrar-se</a>
 	</div>
 }
+
+<style>
+	.dropdown-item:hover {
+		background-color: darkred;
+	}
+</style>

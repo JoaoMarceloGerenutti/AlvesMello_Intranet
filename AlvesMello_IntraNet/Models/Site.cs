@@ -35,6 +35,7 @@ public class Site
     [Display(Name = "Ativo?")]
     public bool IsActive { get; set; }
 
+    [Display(Name = "Categorias")]
     public int CategoryId { get; set; }
 
     [Display(Name = "Categorias")]

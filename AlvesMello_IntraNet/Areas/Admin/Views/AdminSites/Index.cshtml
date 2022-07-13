@@ -21,8 +21,8 @@
 						</ul>
 					</div>
 
-					<div class="form-group col-9">
-						<input type="text" class="form-control" maxlength="100">
+					<div class="form-group col-10">
+						<input name="filter" type="text" class="form-control" maxlength="100" value="@Model.RouteValue["Filter"]">
 					</div>
 
 					<div class="input-group-btn">
@@ -35,18 +35,19 @@
 		</div>
 	</div>
 </form>
+<br />
 
 <div>
 	<vc:pager paging-list="@Model"></vc:pager>
 </div>
 
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<table class="table">
 			<thead>
 				<tr>
 					<th>
-						@Html.DisplayNameFor(model => model.ImageUrl)
+						Imagem do Site
 					</th>
 					<th>
 						@Html.DisplayNameFor(model => model.Name)
@@ -64,7 +65,7 @@
 						@Html.DisplayNameFor(model => model.Category)
 					</th>
 					<th>
-						
+
 					</th>
 				</tr>
 			</thead>
@@ -73,7 +74,7 @@
 				{
 					<tr>
 						<td>
-							<image class="img-thumbnail" src="@item.ImageUrl" />
+							<image class="img-thumbnail" src="@item.ImageUrl" style="max-height: 200px" />
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.Name)
@@ -87,13 +88,25 @@
 						<td>
 							@Html.DisplayFor(modelItem => item.IsActive)
 						</td>
-						<td style="color: #@item.Category.Color">
-							@Html.DisplayFor(modelItem => item.Category.Name)
+						<td style="color: white">
+							<div class="d-flex justify-content-evenly text-center">
+								<div class="rounded-pill p-2 " style="background-color: #@item.Category.Color">
+									@Html.DisplayFor(modelItem => item.Category.Name)
+								</div>
+							</div>
 						</td>
-						<td class="d-flex flex-wrap justify-content-center">
-							<a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.SiteId">Editar</a>
-							<a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.SiteId">Detalhes</a>
-							<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.SiteId">Deletar</a>
+						<td>
+							<div class="d-flex flex-wrap justify-content-evenly">
+								<div>
+									<a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.SiteId">Editar</a>
+								</div>
+								<div>
+									<a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.SiteId">Detalhes</a>
+								</div>
+								<div>
+									<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.SiteId">Deletar</a>
+								</div>
+							</div>
 						</td>
 					</tr>
 				}
