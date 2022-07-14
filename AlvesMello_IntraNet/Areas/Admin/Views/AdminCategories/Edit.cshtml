@@ -1,41 +1,54 @@
 ﻿@model AlvesMello_IntraNet.Models.Category
 
 @{
-    ViewData["Title"] = "Edit";
+	ViewData["Title"] = "Editar Categoria";
 }
 
-<h1>Edit</h1>
-
-<h4>Category</h4>
+<h1>Editar Categoria</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CategoryId" />
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<form asp-action="Edit">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input type="hidden" asp-for="CategoryId" />
+
+				<div class="form-group d-flex">
+					<div>
+						Cor
+						<input asp-for="Color" type="color" class="form-control form-control-color" title="Escolha a cor" value="#@Model.Color" />
+					</div>
+					<div class="col-11">
+						<label asp-for="Name" class="control-label"></label>
+						<input asp-for="Name" class="form-control" />
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="form-group col-12">
+					<label asp-for="Description" class="control-label"></label>
+					<textarea asp-for="Description" class="form-control" rows="8"></textarea>
+					<span asp-validation-for="Description" class="text-danger"></span>
+				</div>
+				<br />
+
+				<div class="col-12">
+					<div class="d-flex">
+						<div class="col-1">
+							<div class="form-group">
+								<input type="submit" value="Salvar" class="btn btn-primary" />
+							</div>
+						</div>
+						<div class="col-1">
+							<div>
+								<a class="btn btn-secondary" asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">Voltar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<br />
