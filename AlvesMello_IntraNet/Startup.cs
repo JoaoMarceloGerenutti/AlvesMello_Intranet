@@ -28,6 +28,9 @@ public class Startup
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
+        services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Home/AccessDenied");
+        services.Configure<ConfigurationImages>(Configuration.GetSection("ConfigurationImagesFolder"));
+
         services.Configure<IdentityOptions>(options =>
         {
             options.Password.RequireDigit = false;
