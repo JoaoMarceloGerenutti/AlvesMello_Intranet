@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.logo-image {
+    width: 64px;
+    height: 52px;
+    border-radius: 2px;
+}
+
+.header-icons {
+    width: 24px;
+    height: 24px;
+}
+
+.profile-picture {
+    width: 48px;
+    height: 48px;
+}
+
+.login-dropdown:hover {
+    background-color: darkred;
+}

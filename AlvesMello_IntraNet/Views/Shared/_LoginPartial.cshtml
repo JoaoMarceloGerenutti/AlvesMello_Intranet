@@ -2,14 +2,15 @@
 
 @inject SignInManager<IdentityUser> SignInManager
 
+<link rel="stylesheet" href="~/css/header.css">
+
 @if (SignInManager.IsSignedIn(User))
 {
 	<div class="dropdown text-end">
 		<a class="d-block link-light text-decoration-none dropdown-menu-start dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
-			<img src="https://github.com/mdo.png" alt="mdo" width="48" height="48" class="rounded-circle">
+			<img class="profile-picture rounded-circle" src="https://github.com/mdo.png" alt="mdo">
 		</a>
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
-			<br />
 			<li class="text-center"><div class="text-light p-3 pt-0 align-middle">@User.Identity.Name</div></li>
 
 			<li><hr class="dropdown-divider text-light"></li>
@@ -17,14 +18,14 @@
 			<li>@await Component.InvokeAsync("FavoriteSiteSummary")</li>
 
 			<li>
-				<a class="dropdown-item text-light" asp-controller="" asp-action="">
+				<a class="login-dropdown dropdown-item text-light" asp-controller="" asp-action="">
 					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Configuration.png" />
 					Configurações
 				</a>
 			</li>
 
 			<li>
-				<a class="dropdown-item text-light" asp-controller="" asp-action="">
+				<a class="login-dropdown dropdown-item text-light" asp-controller="" asp-action="">
 					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Profile.png" />
 					Perfil
 				</a>
@@ -33,9 +34,9 @@
 			<li><hr class="dropdown-divider text-light"></li>
 
 			<li>
-				<form class="dropdown-item text-light d-flex align-items-center" asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
+				<form class="login-dropdown dropdown-item text-light d-flex align-items-center" asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
 					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Logout.png" />
-					<button class="dropdown-item text-light" type="submit">Sair</button>
+					<button class="login-dropdown dropdown-item text-light" type="submit">Sair</button>
 				</form>
 			</li>
 		</ul>
@@ -48,9 +49,3 @@ else
 		<a type="button" class="btn btn-warning" asp-controller="Account" asp-action="Register">Cadastrar-se</a>
 	</div>
 }
-
-<style>
-	.dropdown-item:hover {
-		background-color: darkred;
-	}
-</style>

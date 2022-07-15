@@ -11,43 +11,49 @@
 <body>
 	<header class="p-3 bg-dark text-white">
 		<div class="container">
-			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-				<a href="https://www.alvesemello.com.br" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" style="border: solid 2px #6c757d; border-radius: 4px;">
-					<img src="~/images/A&M.png" width="50" height="42" style="border-radius: 2px" />
-				</a>
-
-				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-					<li>
-						<a class="nav-link px-2 text-secondary" asp-area="" asp-controller="Home" asp-action="Index">
-							<img class="bi d-block mx-auto mb-1" width="24" height="24" src="~/images/Home.png" />
-							Home
+			<div class="d-flex justify-content-between">
+				<div class="d-flex align-items-center">
+					<div>
+						<a href="https://www.alvesemello.com.br" class="d-flex my-2 my-lg-0 text-decoration-none" style="border: solid 2px #6c757d; border-radius: 4px;">
+							<img class="logo-image" src="~/images/A&M.png" />
 						</a>
-					</li>
-					@if (User.IsInRole("Admin"))
-					{
+					</div>
+
+					<ul class="nav col-12 col-lg-auto text-small">
 						<li>
-							<a class="nav-link px-2 text-white" asp-area="Admin" asp-controller="Admin" asp-action="Index">
-								<img class="bi d-block mx-auto mb-1" width="24" height="24" src="~/images/Administration.png" />
-								Admin
+							<a class="nav-link px-2 text-secondary" asp-area="" asp-controller="Home" asp-action="Index">
+								<img class="header-icons bi d-block mx-auto mb-1" src="~/images/Home.png" />
+								Home
 							</a>
 						</li>
-					}
-					<li>
-						@await Component.InvokeAsync("CategoryMenu")
-					</li>
-					<li>
-						<a class="nav-link px-2 text-white" asp-area="" asp-controller="Contact" asp-action="Index">
-							<img class="bi d-block mx-auto mb-1" width="24" height="24" src="~/images/SendEmail.png" />
-							Contato
-						</a>
-					</li>
-				</ul>
+						@if (User.IsInRole("Admin"))
+						{
+							<li>
+								<a class="nav-link px-2 text-white" asp-area="Admin" asp-controller="Admin" asp-action="Index">
+									<img class="header-icons bi d-block mx-auto mb-1" src="~/images/Administration.png" />
+									Admin
+								</a>
+							</li>
+						}
+						<li>
+							@await Component.InvokeAsync("CategoryMenu")
+						</li>
+						<li>
+							<a class="nav-link px-2 text-white" asp-area="" asp-controller="Contact" asp-action="Index">
+								<img class="header-icons bi d-block mx-auto mb-1" src="~/images/SendEmail.png" />
+								Contato
+							</a>
+						</li>
+					</ul>
+				</div>
 
-				<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" asp-controller="Site" asp-action="Search" method="get">
-					<input type="search" class="form-control form-control-dark" placeholder="Procurar Site" name="searchString" value="@ViewData["searchString"]" aria-label="Search">
-				</form>
+				<div class="d-flex align-items-center">
+					<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" asp-controller="Site" asp-action="Search" method="get">
+						<input type="search" class="form-control form-control-dark" placeholder="Procurar Site" name="searchString" value="@ViewData["searchString"]" aria-label="Search">
+					</form>
 
-				@await Html.PartialAsync("_LoginPartial")
+					@await Html.PartialAsync("_LoginPartial")
+				</div>
 			</div>
 		</div>
 	</header>
