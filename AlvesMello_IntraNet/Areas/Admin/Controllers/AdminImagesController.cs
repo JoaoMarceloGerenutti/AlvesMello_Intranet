@@ -68,4 +68,40 @@ public class AdminImagesController : Controller
 
         return View(ViewData);
     }
+
+    public IActionResult GetImages()
+    {
+        FileManagerModel model = new FileManagerModel();
+
+        var userImagesPath = Path.Combine(_hostingEnvironment.WebRootPath, _myConfig.FolderNameImagesSites);
+
+        DirectoryInfo dir = new DirectoryInfo(userImagesPath);
+
+        FileInfo[] files = dir.GetFiles();
+
+        model.PathImagesSite = _myConfig.FolderNameImagesSites;
+
+        if (files.Length == 0)
+        {
+            ViewData["Erro"] = $"Nenhum arquivo encontrado na pasta {userImagesPath}";
+        }
+
+        model.Files = files;
+
+        return View(model);
+    }
+
+    public IActionResult DeleteFile(string fname)
+    {
+        string _imageDelete = Path.Combine(_hostingEnvironment.WebRootPath, _myConfig.FolderNameImagesSites + "\\", fname);
+
+        if (System.IO.File.Exists(_imageDelete))
+        {
+            System.IO.File.Delete(_imageDelete);
+
+            ViewData["Deleted"] = $"Arquivo(s) {_imageDelete} deletado com sucesso";
+        }
+
+        return View("index");
+    }
 }
