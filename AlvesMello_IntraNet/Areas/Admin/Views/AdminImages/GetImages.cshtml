@@ -10,7 +10,7 @@
 
 @if (Model.Files != null)
 {
-	<section class="ftco-section bg-light">
+	<section class="ftco-section pt-4">
 		<div class="container">
 			<div class="row justify-content-center mb-3">
 				<div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
@@ -54,9 +54,9 @@
 					var path = Model.PathImagesSite;
 
 					<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-						<div class="block-7">
+						<div class="block-7 border">
 							<div>
-								<image class="img" src="/@path/@file.Name"></image>
+								<image class="img border border-dark" src="/@path/@file.Name"></image>
 							</div>
 							<div class="text-center p-4">
 								<span class="excerpt d-block">@file.Name</span>
@@ -72,6 +72,7 @@
 	</section>
 }
 
+@*Modals*@
 <body id="deleteModal">
 	<div id="confirmationModal" tabindex="-1" class="modal fade" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-confirm">
@@ -101,26 +102,28 @@
 	<div id="uploadModal" tabindex="-1" class="modal fade" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<form method="post" enctype="multipart/form-data" asp-controller="AdminImages" asp-action="UploadFiles">
+				<div class="modal-header d-flex justify-content-end">
+					<button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div>
 					<div class="d-flex justify-content-center">
 						<image src="/images/UploadImages.png" width="200" height="200" alt="Upload de Imagens" />
-
+					</div>
+					<form method="post" enctype="multipart/form-data" asp-controller="AdminImages" asp-action="UploadFiles">
 						<div class="form-group">
-							<div class="col-md-10">
-								<p><b>Selecione um ou mais arquivos para enviar </b></p>
+							<div>
+								<h4 id="modalTitle" class="modal-title">Selecione um ou mais arquivos para enviar</h4>
 								<p>(Arquivos com o mesmo nome serão sobrescitos)</p>
 								<input type="file" name="files" multiple class="button btn-outline-primary" />
 							</div>
 							<br />
 
-							<div class="form-group">
-								<div class="col-md-10">
-									<input type="submit" value="Enviar Arquivo(s)" class="button btn-outline-primary" />
-								</div>
+							<div class="modal-footer d-flex justify-content-center">
+								<button type="submit" class="btn btn-outline-primary">Enviar Arquivo(s)</button>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -146,6 +149,11 @@
 </script>
 
 <style>
+	.ftco-section {
+		border-radius: 4px;
+		background-color: #e1e3db;
+	}
+
 	.block-7 {
 		border-radius: 4px;
 		margin-bottom: 30px;
@@ -218,7 +226,7 @@
 		margin: 30px auto;
 	}
 
-		.modal-confirm .modal-content {
+		.modal-dialog .modal-content {
 			padding: 20px;
 			border-radius: 5px;
 			border: none;
@@ -226,7 +234,7 @@
 			font-size: 14px;
 		}
 
-		.modal-confirm .modal-header {
+		.modal-header {
 			border-bottom: none;
 			position: relative;
 		}
@@ -236,7 +244,7 @@
 			font-size: 26px;
 		}
 
-		.modal-confirm .close {
+		.modal-dialog .close {
 			position: absolute;
 			top: -5px;
 			right: -2px;
@@ -246,11 +254,11 @@
 			font-weight: 600
 		}
 
-		.modal-confirm .modal-body {
+		.modal-dialog .modal-body {
 			color: #999;
 		}
 
-		.modal-confirm .modal-footer {
+		.modal-dialog .modal-footer {
 			border: none;
 			text-align: center;
 			border-radius: 5px;
@@ -275,7 +283,7 @@
 				margin-top: 13px;
 			}
 
-		.modal-confirm .btn {
+		.modal-dialog .btn {
 			color: #fff;
 			border-radius: 4px;
 			background: #60c7c1;
