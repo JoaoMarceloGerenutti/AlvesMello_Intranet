@@ -2,7 +2,7 @@
 
 <div class="col-sm-4 col-md-4 col-lg-4">
 	<a href="@Model.SiteUrl">
-		<p><img src="@Model.ImageUrl" class="img-fluid" style="width: 410px; height: 200px;"/></p>
+		<p><img src="@Model.ImageUrl" class="img-fluid" style="width: 410px; height: 200px;" /></p>
 	</a>
 
 	<h4>
@@ -10,9 +10,11 @@
 	</h4>
 
 	<h5>
-		<button class="btn" style="background-color: #@Model.Category.Color; color: white">
-			@Model.Category.Name
-		</button>
+		<form asp-controller="Site" asp-action="List" asp-route-category="@Model.Category.Name">
+			<button class="btn" style="background-color: @Model.Category.Color; color: white">
+				@Model.Category.Name
+			</button>
+		</form>
 	</h5>
 
 	<p>@Model.Description</p>

@@ -9,7 +9,7 @@ public class Category
     [Key]
     public int CategoryId { get; set; }
 
-    [StringLength(6, ErrorMessage = "A cor não pode Exceder {1} caracteres")]
+    [StringLength(7, ErrorMessage = "A cor não pode Exceder {1} caracteres")]
     [Required(ErrorMessage = "A Cor da Categoria é Obrigatória!")]
     [Display(Name = "Cor da Categoria")]
     public string Color { get; set; }
