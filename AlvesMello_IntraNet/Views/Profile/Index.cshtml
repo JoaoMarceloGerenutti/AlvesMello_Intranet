@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@model ProfileViewModel
+
+<div class="container">
 	<div class="row gutters">
 		<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
 			<div class="card h-100">
@@ -8,8 +10,8 @@
 							<div class="user-avatar">
 								<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
 							</div>
-							<h5 class="user-name">Yuki Hayashi</h5>
-							<h6 class="user-email">yuki@Maxwell.com</h6>
+							<h5 class="user-name">@Model.Name</h5>
+							<h6 class="user-email">@Model.Email</h6>
 						</div>
 					</div>
 				</div>
@@ -25,20 +27,20 @@
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="fullName">Nome Completo</label>
-								<input type="text" class="form-control" id="fullName" placeholder="Digite o nome completo">
+								<input type="text" class="form-control" id="fullName" placeholder="Digite o nome completo" value="@Model.Name">
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="birthDate">Data de Nascimento</label>
-								<input type="date" class="form-control" id="birthDate" />
+								<input type="date" class="form-control" id="birthDate" value="@String.Format("{0:d}", Model.BirthDate)" />
 							</div>
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="phone">Celular</label>
-								<input type="tel" class="form-control" id="phone" placeholder="Digite o número do celular">
+								<input type="tel" class="form-control" id="phone" placeholder="Digite o número do celular" value="@Model.Phone">
 							</div>
 						</div>
 					</div>
@@ -51,20 +53,20 @@
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="eMail">Email</label>
-								<input type="email" class="form-control" id="eMail" placeholder="Digite o email">
+								<input type="email" class="form-control" id="eMail" placeholder="Digite o email" value="@Model.Email">
 							</div>
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="telephoneExtension">Ramal</label>
-								<input type="number" min="0" max="99" class="form-control" id="telephoneExtension" placeholder="Digite o seu ramal">
+								<input type="number" min="0" max="99" class="form-control" id="telephoneExtension" placeholder="Digite o seu ramal" value="@Model.TelephoneExtension">
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="am">Número do AM</label>
-								<input type="number" class="form-control" id="am" placeholder="Digite o número do AM">
+								<input type="number" class="form-control" id="am" placeholder="Digite o número do AM" value="@Model.AM">
 							</div>
 						</div>
 					</div>
@@ -93,7 +95,7 @@
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="password">Senha Atual</label>
-								<input type="password" class="form-control" id="password" />
+								<input type="password" class="form-control" id="password" @*value="@Model.CurrentPassword"*@ />
 							</div>
 						</div>
 					</div>

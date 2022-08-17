@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AlvesMello_IntraNet.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace AlvesMello_IntraNet.Services
 {
     public class SeedUserRoleInitial : ISeedUserRoleInitial
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly string roleMember = "Member";
         private readonly string roleAdmin = "Admin";
 
-        public SeedUserRoleInitial(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public SeedUserRoleInitial(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -43,10 +44,11 @@ namespace AlvesMello_IntraNet.Services
             string emailMember = "user@alvesmello.com.br";
             if (_userManager.FindByEmailAsync(emailMember).Result == null)
             {
-                IdentityUser user = new()
+                ApplicationUser user = new()
                 {
                     UserName = emailMember,
                     Email = emailMember,
+                    FullName = "Membro - A&M",
                     NormalizedUserName = emailMember.ToUpper(),
                     NormalizedEmail = emailMember.ToUpper(),
                     EmailConfirmed = true,
@@ -65,10 +67,11 @@ namespace AlvesMello_IntraNet.Services
             string emailAdmin = "admin@alvesmello.com.br";
             if (_userManager.FindByEmailAsync(emailAdmin).Result == null)
             {
-                IdentityUser user = new()
+                ApplicationUser user = new()
                 {
                     UserName = emailAdmin,
                     Email = emailAdmin,
+                    FullName = "Administrador - A&M",
                     NormalizedUserName = emailAdmin.ToUpper(),
                     NormalizedEmail = emailAdmin.ToUpper(),
                     EmailConfirmed = true,

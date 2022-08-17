@@ -1,4 +1,5 @@
-﻿using AlvesMello_IntraNet.ViewModels;
+﻿using AlvesMello_IntraNet.Models;
+using AlvesMello_IntraNet.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +7,11 @@ namespace AlvesMello_IntraNet.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountController(UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager)
+    public AccountController(UserManager<ApplicationUser> userManager,
+        SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -62,7 +63,7 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
                 UserName = registerVM.UserName
             };
