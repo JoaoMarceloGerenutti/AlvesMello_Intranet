@@ -4,6 +4,8 @@ namespace AlvesMello_IntraNet.ViewModels;
 
 public class ProfileViewModel
 {
+    [Required(ErrorMessage = "Informe um Nome!")]
+    [Display(Name = "Nome Completo")]
     public string Name { get; set; }
     public DateTime BirthDate { get; set; }
     public string Phone { get; set; }

@@ -8,7 +8,7 @@
 					<div class="account-settings">
 						<div class="user-profile">
 							<div class="user-avatar">
-								<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+								<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="@Model.Name">
 							</div>
 							<h5 class="user-name">@Model.Name</h5>
 							<h6 class="user-email">@Model.Email</h6>
@@ -26,21 +26,21 @@
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
-								<label for="fullName">Nome Completo</label>
-								<input type="text" class="form-control" id="fullName" placeholder="Digite o nome completo" value="@Model.Name">
+								<label asp-for="Name">Nome Completo</label>
+								<input asp-for="Name" type="text" class="form-control" placeholder="Digite o nome completo">
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
-								<label for="birthDate">Data de Nascimento</label>
-								<input type="date" class="form-control" id="birthDate" value="@String.Format("{0:d}", Model.BirthDate)" />
+								<label asp-for="BirthDate">Data de Nascimento</label>
+								<input asp-for="BirthDate" type="date" class="form-control" />
 							</div>
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
-								<label for="phone">Celular</label>
-								<input type="tel" class="form-control" id="phone" placeholder="Digite o número do celular" value="@Model.Phone">
+								<label asp-for="Phone">Celular</label>
+								<input asp-for="Phone" type="tel" class="form-control" placeholder="Digite o número do celular">
 							</div>
 						</div>
 					</div>
@@ -52,21 +52,21 @@
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
-								<label for="eMail">Email</label>
-								<input type="email" class="form-control" id="eMail" placeholder="Digite o email" value="@Model.Email">
+								<label asp-for="Email">Email</label>
+								<input asp-for="Email" type="email" class="form-control" placeholder="Digite o email" disabled>
 							</div>
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
-								<label for="telephoneExtension">Ramal</label>
-								<input type="number" min="0" max="99" class="form-control" id="telephoneExtension" placeholder="Digite o seu ramal" value="@Model.TelephoneExtension">
+								<label asp-for="TelephoneExtension">Ramal</label>
+								<input asp-for="TelephoneExtension" type="number" min="0" max="99" class="form-control" placeholder="Digite o seu ramal">
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
-								<label for="am">Número do AM</label>
-								<input type="number" class="form-control" id="am" placeholder="Digite o número do AM" value="@Model.AM">
+								<label asp-for="AM">Número do AM</label>
+								<input asp-for="AM" type="number" class="form-control" placeholder="Digite o número do AM" >
 							</div>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-group">
 								<label for="password">Senha Atual</label>
-								<input type="password" class="form-control" id="password" @*value="@Model.CurrentPassword"*@ />
+								<input type="password" class="form-control" id="password" />
 							</div>
 						</div>
 					</div>
