@@ -28,6 +28,7 @@ namespace AlvesMello_IntraNet.Controllers
                 Name = user.Result.FullName,
                 BirthDate = user.Result.BirthDate,
                 Phone = user.Result.PhoneNumber,
+                Photo = user.Result.Photo,
                 Email = user.Result.UserName,
                 TelephoneExtension = user.Result.TelephoneExtension,
                 AM = user.Result.AM

@@ -9,6 +9,7 @@ public class ProfileViewModel
     public string Name { get; set; }
     public DateTime BirthDate { get; set; }
     public string Phone { get; set; }
+    public string Photo { get; set; }
 
     [Required(ErrorMessage = "Informe um E-mail!")]
     [Display(Name = "E-mail")]
