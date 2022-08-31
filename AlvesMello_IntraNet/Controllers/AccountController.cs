@@ -37,7 +37,7 @@ public class AccountController : Controller
 
         if (user != null)
         {
-            var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, true, false);
             if (result.Succeeded)
             {
                 if (string.IsNullOrEmpty(loginVM.ReturnUrl))
@@ -68,6 +68,8 @@ public class AccountController : Controller
                 UserName = registerVM.UserName
             };
             var result = await _userManager.CreateAsync(user, registerVM.Password);
+
+            await _userManager.SetEmailAsync(user, user.UserName);
 
             if (result.Succeeded)
             {

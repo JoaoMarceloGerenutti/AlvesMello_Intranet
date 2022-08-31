@@ -1,20 +1,40 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace AlvesMello_IntraNet.ViewModels;
-
 public class ProfileViewModel
 {
-    [Required(ErrorMessage = "Informe um Nome!")]
-    [Display(Name = "Nome Completo")]
-    public string Name { get; set; }
-    public DateTime BirthDate { get; set; }
-    public string Phone { get; set; }
+    [Key]
+    public string Id { get; set; }
+
+    [Display(Name = "Foto de Perfil")]
     public string Photo { get; set; }
 
-    [Required(ErrorMessage = "Informe um E-mail!")]
+    [Required(ErrorMessage = "Informe seu Nome Completo!")]
+    [Display(Name = "Nome Completo")]
+    public string FullName { get; set; }
+
+    [Required(ErrorMessage = "Informe sua Data de Nascimento!")]
+    [Display(Name = "Data de Nascimento")]
+    public DateTime BirthDate { get; set; }
+
+    [Display(Name = "Celular")]
+    [RegularExpression(@"^[0-9]{2}-[0-9]{4}-[0 - 9]{ 4}$", ErrorMessage = "Celular Inválido!")]
+    public string PhoneNumber { get; set; }
+
     [Display(Name = "E-mail")]
     [EmailAddress(ErrorMessage = "E-mail Inválido!")]
     public string Email { get; set; }
+
+    [Required(ErrorMessage = "Informe seu Ramal! (0 caso não tenha)")]
+    [Display(Name = "Ramal")]
     public int TelephoneExtension { get; set; }
+
+    [Required(ErrorMessage = "Informe o Número do seu AM! (localizado em cima do seu Computador)")]
+    [Display(Name = "Número do AM")]
     public int AM { get; set; }
+
+    [Required(ErrorMessage = "Informe a Senha Atual!")]
+    [DataType(DataType.Password)]
+    [Display(Name = "Senha Atual")]
+    public string Password { get; set; }    
 }

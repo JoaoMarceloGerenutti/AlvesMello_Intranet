@@ -9,9 +9,15 @@
 {
 	var user = _userManager.FindByNameAsync(User.Identity.Name);
 
+	var profileImage = user.Result.Photo;
+	if (string.IsNullOrWhiteSpace(profileImage))
+	{
+		profileImage = "/images/ProfileImage.png";
+	}
+
 	<div class="dropdown text-end">
 		<a class="d-block link-light text-decoration-none dropdown-menu-start dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
-			<img class="profile-picture rounded-circle" src="@user.Result.Photo" alt="mdo">
+			<img class="profile-picture rounded-circle" src="@profileImage" alt="mdo">
 		</a>
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
 			<li class="text-center"><div class="fs-5 text-break text-white p-1 pt-0 align-middle">@user.Result.FullName</div></li>

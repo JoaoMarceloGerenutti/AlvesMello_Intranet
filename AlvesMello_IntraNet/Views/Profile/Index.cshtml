@@ -3,116 +3,156 @@
 <div class="container">
 	<div class="row gutters">
 		<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-			<div class="card h-100">
-				<div class="card-body">
-					<div class="account-settings">
-						<div class="user-profile">
-							<div class="user-avatar">
-								<img src="@Model.Photo" alt="@Model.Name">
-							</div>
-							<h5 class="user-name">@Model.Name</h5>
-							<h6 class="user-email">@Model.Email</h6>
-						</div>
-					</div>
+			<div class="card mb-4 mb-xl-0" style="background-color: #d3d8dd">
+				<div class="card-header">
+					Foto de Perfil
+				</div>
+				<div class="card-body text-center">
+					<img class="img-account-profile rounded-circle mb-2 w-100" src="@Model.Photo" alt="@Model.FullName">
+
+					<form method="post" id="upload-form" name="upload-form" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadImage">
+						<input type="file" name="file" id="file" accept="image/png, image/gif, image/jpeg" hidden onchange="submitImage()" />
+					</form>
+
+					<br />
+					<label for="file" class="btn btn-primary">Carregar nova imagem</label>
+					<div class="small font-italic text-muted mb-4">PNG, JPG e GIF</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+			<div class="container">
+				@*Feedback Mensage*@
+			</div>
+
 			<div class="card h-100">
 				<div class="card-body">
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<h6 class="mb-2 text-primary">Informações Pessoal</h6>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label asp-for="Name">Nome Completo</label>
-								<input asp-for="Name" type="text" class="form-control" placeholder="Digite o nome completo">
+					<form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UpdateProfile">
+						<div class="row gutters">
+							<input type="hidden" asp-for="Photo" />
+							<input type="hidden" asp-for="Id" />
+
+							<div asp-validation-summary="All" class="text-danger"></div>
+
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mb-2 text-primary">Informações Pessoal</h6>
 							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label asp-for="BirthDate">Data de Nascimento</label>
-								<input asp-for="BirthDate" type="date" class="form-control" />
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="FullName"></label>
+									<input asp-for="FullName" type="text" class="form-control" placeholder="Digite o nome completo">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="BirthDate"></label>
+									<input asp-for="BirthDate" type="date" class="form-control" />
+								</div>
+							</div>
+
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="PhoneNumber"></label>
+									<input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Digite o número do celular">
+								</div>
 							</div>
 						</div>
 
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label asp-for="Phone">Celular</label>
-								<input asp-for="Phone" type="tel" class="form-control" placeholder="Digite o número do celular">
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mt-3 mb-2 text-primary">Informações Empresarial</h6>
 							</div>
-						</div>
-					</div>
 
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<h6 class="mt-3 mb-2 text-primary">Informações Empresarial</h6>
-						</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="Email"></label>
+									<input asp-for="Email" type="email" class="form-control" placeholder="Digite o email" disabled>
+									<input asp-for="Email" type="hidden">
+								</div>
+							</div>
 
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label asp-for="Email">Email</label>
-								<input asp-for="Email" type="email" class="form-control" placeholder="Digite o email" disabled>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="TelephoneExtension"></label>
+									<input asp-for="TelephoneExtension" type="number" class="form-control" placeholder="Digite o seu ramal">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="AM"></label>
+									<input asp-for="AM" type="number" class="form-control" placeholder="Digite o número do AM">
+								</div>
 							</div>
 						</div>
+						<br />
 
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label asp-for="TelephoneExtension">Ramal</label>
-								<input asp-for="TelephoneExtension" type="number" min="0" max="99" class="form-control" placeholder="Digite o seu ramal">
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mb-2 text-primary">Alterar Senha</h6>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label for="newPassword">Nova Senha</label>
+									<input for="newPassword" name="newPassword" type="password" class="form-control" id="newPassword">
+									<span validation-for="newPassword" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label for="newPassword">Repitir Senha</label>
+									<input for="newPassword" type="password" class="form-control" id="repeatPassword" />
+								</div>
 							</div>
 						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label asp-for="AM">Número do AM</label>
-								<input asp-for="AM" type="number" class="form-control" placeholder="Digite o número do AM" >
-							</div>
-						</div>
-					</div>
-					<br />
+						<br />
 
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<h6 class="mb-2 text-primary">Alterar Senha</h6>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="newPassword">Nova Senha</label>
-								<input type="password" class="form-control" id="newPassword">
+						<div class="row gutters">
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label asp-for="Password"></label>
+									<input asp-for="Password" type="password" class="form-control" />
+								</div>
 							</div>
 						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="repeatPassword">Repitir Senha</label>
-								<input type="password" class="form-control" id="repeatPassword" />
-							</div>
-						</div>
-					</div>
-					<br />
+						<br />
 
-					<div class="row gutters">
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="password">Senha Atual</label>
-								<input type="password" class="form-control" id="password" />
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="text-right">
+									<button type="submit" id="submit" name="submit" class="btn btn-primary">Atualizar</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<br />
-
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<div class="text-right">
-								<button type="button" id="submit" name="submit" class="btn btn-primary">Atualizar</button>
-							</div>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+@*Upload Image*@
+<script type="text/javascript">
+	function submitImage() {
+		$("#upload-form").submit();
+	}
+</script>
+
+@*Repeat Password*@
+<script>
+	var newPassword = document.getElementById("newPassword")
+		, repeatPassword = document.getElementById("repeatPassword");
+
+	function validatePassword() {
+		if (newPassword.value != repeatPassword.value) {
+			repeatPassword.setCustomValidity("As Senhas não Coincidem!");
+		} else {
+			repeatPassword.setCustomValidity('');
+		}
+	}
+
+	newPassword.onchange = validatePassword;
+	repeatPassword.onkeyup = validatePassword;
+</script>
 
 <style>
 	.account-settings .user-profile {

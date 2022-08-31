@@ -4,8 +4,8 @@
 	ViewBag.Title = "Arquivos";
 }
 
-<script src="/wwwroot/lib/jquery/dist/jquery.min.js"></script>
-<script src="/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 @if (Model.Files != null)
 {
@@ -112,7 +112,7 @@
 						<div class="form-group">
 							<div>
 								<h4 id="modalTitle" class="modal-title">Selecione um ou mais arquivos para enviar</h4>
-								<p>(Arquivos com o mesmo nome serão sobrescitos)</p>
+								<p>(Arquivos com o mesmo nome serão sobrescritos)</p>
 								<input type="file" name="files" multiple class="button btn-outline-primary" />
 							</div>
 							<br />
