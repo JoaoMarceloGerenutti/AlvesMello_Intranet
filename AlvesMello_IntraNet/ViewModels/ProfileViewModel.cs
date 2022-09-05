@@ -18,7 +18,7 @@ public class ProfileViewModel
     public DateTime BirthDate { get; set; }
 
     [Display(Name = "Celular")]
-    [RegularExpression(@"^[0-9]{2}-[0-9]{4}-[0 - 9]{ 4}$", ErrorMessage = "Celular Inválido!")]
+    [RegularExpression(@"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$", ErrorMessage = "Celular Inválido!")]
     public string PhoneNumber { get; set; }
 
     [Display(Name = "E-mail")]
@@ -36,5 +36,9 @@ public class ProfileViewModel
     [Required(ErrorMessage = "Informe a Senha Atual!")]
     [DataType(DataType.Password)]
     [Display(Name = "Senha Atual")]
-    public string Password { get; set; }    
+    public string Password { get; set; }
+
+    [DataType(DataType.Password)]
+    [Display(Name = "Nova Senha")]
+    public string NewPassword { get; set; }
 }

@@ -26,13 +26,13 @@ namespace AlvesMello_IntraNet.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public IActionResult Index()
+        public IActionResult Update()
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name);
 
             if (user == null)
             {
-                return Redirect("Home");
+                return RedirectToAction("Index", "Home");
             }
 
             var profileVM = new ProfileViewModel
@@ -56,32 +56,38 @@ namespace AlvesMello_IntraNet.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateProfile([Bind("Id, FullName, BirthDate, PhoneNumber, TelephoneExtension, AM")] ApplicationUser applicationUser, string password, string newPassword)
+        public async Task<IActionResult> Update(ProfileViewModel profileVM)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (await VerifyUserPassword(password))
-                {
-                    // Update profile information on database.
-                    ApplicationUser updateUser = _context.Users
-                                                    .FirstOrDefault(u => u.Id == applicationUser.Id);
-
-                    updateUser.FullName = applicationUser.FullName;
-                    updateUser.BirthDate = applicationUser.BirthDate;
-                    updateUser.PhoneNumber = applicationUser.PhoneNumber;
-                    updateUser.TelephoneExtension = applicationUser.TelephoneExtension;
-                    updateUser.AM = applicationUser.AM;
-
-                    if (!string.IsNullOrEmpty(newPassword))
-                    {
-                        await _userManager.ChangePasswordAsync(updateUser, password, newPassword);
-                    }
-
-                    await _context.SaveChangesAsync();
-                }
+                return View(profileVM);
             }
-            return Redirect("Index");
+
+            if (await VerifyUserPassword(profileVM.Password))
+            {
+                // Update profile information on database.
+                ApplicationUser updateUser = _context.Users
+                                                .FirstOrDefault(u => u.Id == profileVM.Id);
+
+                updateUser.FullName = profileVM.FullName;
+                updateUser.BirthDate = profileVM.BirthDate;
+                updateUser.PhoneNumber = profileVM.PhoneNumber;
+                updateUser.TelephoneExtension = profileVM.TelephoneExtension;
+                updateUser.AM = profileVM.AM;
+
+                if (!string.IsNullOrEmpty(profileVM.NewPassword))
+                {
+                    await _userManager.ChangePasswordAsync(updateUser, profileVM.Password, profileVM.NewPassword);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Senha Atual Inválida!");
+            }
+
+            return View(profileVM);
         }
 
         public async Task<IActionResult> UploadImage(IFormFile file)
@@ -119,7 +125,7 @@ namespace AlvesMello_IntraNet.Controllers
                     await _context.SaveChangesAsync();
                 }
             }
-            return Redirect("Index");
+            return Redirect("Update");
         }
 
         private async Task<bool> VerifyUserPassword(string password)

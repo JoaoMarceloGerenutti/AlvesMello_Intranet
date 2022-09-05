@@ -8,7 +8,7 @@
 					Foto de Perfil
 				</div>
 				<div class="card-body text-center">
-					<img class="img-account-profile rounded-circle mb-2 w-100" src="@Model.Photo" alt="@Model.FullName">
+					<img class="img-account-profile rounded-circle mb-2 w-100" src="@Model.Photo" alt="@Model.FullName" draggable="false">
 
 					<form method="post" id="upload-form" name="upload-form" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadImage">
 						<input type="file" name="file" id="file" accept="image/png, image/gif, image/jpeg" hidden onchange="submitImage()" />
@@ -21,18 +21,16 @@
 			</div>
 		</div>
 		<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-			<div class="container">
-				@*Feedback Mensage*@
+			<div class="container text-danger">
+				@Html.ValidationSummary()
 			</div>
 
 			<div class="card h-100">
 				<div class="card-body">
-					<form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UpdateProfile">
+					<form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="Update">
 						<div class="row gutters">
 							<input type="hidden" asp-for="Photo" />
 							<input type="hidden" asp-for="Id" />
-
-							<div asp-validation-summary="All" class="text-danger"></div>
 
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<h6 class="mb-2 text-primary">Informações Pessoal</h6>
@@ -41,12 +39,14 @@
 								<div class="form-group">
 									<label asp-for="FullName"></label>
 									<input asp-for="FullName" type="text" class="form-control" placeholder="Digite o nome completo">
+									<span asp-validation-for="FullName" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 								<div class="form-group">
 									<label asp-for="BirthDate"></label>
 									<input asp-for="BirthDate" type="date" class="form-control" />
+									<span asp-validation-for="BirthDate" class="text-danger"></span>
 								</div>
 							</div>
 
@@ -54,6 +54,7 @@
 								<div class="form-group">
 									<label asp-for="PhoneNumber"></label>
 									<input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Digite o número do celular">
+									<span asp-validation-for="PhoneNumber" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
@@ -67,6 +68,7 @@
 								<div class="form-group">
 									<label asp-for="Email"></label>
 									<input asp-for="Email" type="email" class="form-control" placeholder="Digite o email" disabled>
+									<span asp-validation-for="Email" class="text-danger"></span>
 									<input asp-for="Email" type="hidden">
 								</div>
 							</div>
@@ -75,12 +77,14 @@
 								<div class="form-group">
 									<label asp-for="TelephoneExtension"></label>
 									<input asp-for="TelephoneExtension" type="number" class="form-control" placeholder="Digite o seu ramal">
+									<span asp-validation-for="TelephoneExtension" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 								<div class="form-group">
 									<label asp-for="AM"></label>
 									<input asp-for="AM" type="number" class="form-control" placeholder="Digite o número do AM">
+									<span asp-validation-for="AM" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
@@ -92,15 +96,15 @@
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 								<div class="form-group">
-									<label for="newPassword">Nova Senha</label>
-									<input for="newPassword" name="newPassword" type="password" class="form-control" id="newPassword">
+									<label asp-for="NewPassword">Nova Senha</label>
+									<input asp-for="NewPassword" name="newPassword" type="password" class="form-control" id="newPassword">
 									<span validation-for="newPassword" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 								<div class="form-group">
-									<label for="newPassword">Repitir Senha</label>
-									<input for="newPassword" type="password" class="form-control" id="repeatPassword" />
+									<label asp-for="NewPassword">Repitir Senha</label>
+									<input asp-for="NewPassword" type="password" class="form-control" id="repeatPassword" />
 								</div>
 							</div>
 						</div>
@@ -111,6 +115,7 @@
 								<div class="form-group">
 									<label asp-for="Password"></label>
 									<input asp-for="Password" type="password" class="form-control" />
+									<span asp-validation-for="Password" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
@@ -119,7 +124,7 @@
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="text-right">
-									<button type="submit" id="submit" name="submit" class="btn btn-primary">Atualizar</button>
+									<button type="submit" class="btn btn-primary">Atualizar</button>
 								</div>
 							</div>
 						</div>

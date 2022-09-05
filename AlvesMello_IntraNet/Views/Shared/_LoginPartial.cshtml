@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<ApplicationUser> _signInManager
 @inject UserManager<ApplicationUser> _userManager
 
 <link rel="stylesheet" href="~/css/header.css">
 
-@if (SignInManager.IsSignedIn(User))
+@if (_signInManager.IsSignedIn(User))
 {
 	var user = _userManager.FindByNameAsync(User.Identity.Name);
 
@@ -17,7 +17,7 @@
 
 	<div class="dropdown text-end">
 		<a class="d-block link-light text-decoration-none dropdown-menu-start dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
-			<img class="profile-picture rounded-circle" src="@profileImage" alt="mdo">
+			<img class="profile-picture rounded-circle" src="@profileImage" alt="@user.Result.FullName" draggable="false">
 		</a>
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="background-color: rgba(112, 0, 4, 1)">
 			<li class="text-center"><div class="fs-5 text-break text-white p-1 pt-0 align-middle">@user.Result.FullName</div></li>
@@ -34,7 +34,7 @@
 			</li>
 
 			<li>
-				<a class="login-dropdown dropdown-item text-light" asp-controller="Profile" asp-action="Index">
+				<a class="login-dropdown dropdown-item text-light" asp-controller="Profile" asp-action="Update">
 					<img class="mx-auto mb-1" width="24" height="24" src="~/images/Profile.png" />
 					Perfil
 				</a>
