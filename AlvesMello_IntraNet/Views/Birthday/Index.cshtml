@@ -1,0 +1,267 @@
+﻿@using System.Globalization
+@model IEnumerable<ApplicationUser>
+
+<div>
+	<h2>Calendário de Aniversáriantes</h2>
+</div>
+
+@{
+	List<ApplicationUser> january = new List<ApplicationUser>();
+	List<ApplicationUser> february = new List<ApplicationUser>();
+	List<ApplicationUser> march = new List<ApplicationUser>();
+	List<ApplicationUser> april = new List<ApplicationUser>();
+	List<ApplicationUser> may = new List<ApplicationUser>();
+	List<ApplicationUser> june = new List<ApplicationUser>();
+	List<ApplicationUser> july = new List<ApplicationUser>();
+	List<ApplicationUser> august = new List<ApplicationUser>();
+	List<ApplicationUser> september = new List<ApplicationUser>();
+	List<ApplicationUser> october = new List<ApplicationUser>();
+	List<ApplicationUser> november = new List<ApplicationUser>();
+	List<ApplicationUser> december = new List<ApplicationUser>();
+
+	foreach (var user in Model)
+	{
+		switch (user.BirthDate.Month)
+		{
+			case 1:
+				january.Add(user);
+				break;
+			case 2:
+				february.Add(user);
+				break;
+			case 3:
+				march.Add(user);
+				break;
+			case 4:
+				april.Add(user);
+				break;
+			case 5:
+				may.Add(user);
+				break;
+			case 6:
+				june.Add(user);
+				break;
+			case 7:
+				july.Add(user);
+				break;
+			case 8:
+				august.Add(user);
+				break;
+			case 9:
+				september.Add(user);
+				break;
+			case 10:
+				october.Add(user);
+				break;
+			case 11:
+				november.Add(user);
+				break;
+			default:
+				december.Add(user);
+				break;
+		}
+	}
+}
+
+<div class="container">
+	@*Janeiro ~ Abril*@
+	<div class="w-80 h-90 d-flex">
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #c31432">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Janeiro</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in january)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #b11332">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Fevereiro</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in february)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #a01233">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Março</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in march)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #8d1133">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Abril</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in april)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*Maio ~ Agosto*@
+	<div class="w-80 h-90 d-flex">
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #771034">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Maio</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in may)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #710f34">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Junho</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in june)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #670e34">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Julho</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in july)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #560e35">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Agosto</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in august)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*Setembro ~ Dezembro*@
+	<div class="w-80 h-90 d-flex">
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #450c35">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Setembro</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in september)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #370c35">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Outubro</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in october)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #2f0c36">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Novembro</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in november)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class="text-white mb-1 col-sm-3 col-md-3 col-lg-3 p-1">
+			<div class="card h-100" style="background-color: #250b36">
+				<div class="card-header d-flex justify-content-center">
+					<h3 class="card-title">Dezembro</h3>
+				</div>
+				<div class="card-body">
+					@foreach (var user in december)
+					{
+						<h6>
+							@user.BirthDate.Day - @user.FullName
+						</h6>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
