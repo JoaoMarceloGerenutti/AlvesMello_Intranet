@@ -35,9 +35,10 @@ public class Site
     [Display(Name = "Ativo?")]
     public bool IsActive { get; set; }
 
-    [Display(Name = "Categorias")]
-    public int CategoryId { get; set; }
+    [Display(Name = "Departamentos")]
+    [Column("DepartmentId")]
+    public int DepartmentId { get; set; }
 
-    [Display(Name = "Categorias")]
-    public virtual Category Category { get; set; }
+    [Display(Name = "Departamentos")]
+    public virtual Department Department { get; set; }
 }

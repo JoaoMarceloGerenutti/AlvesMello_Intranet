@@ -14,19 +14,19 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles="Admin")]
-    public class AdminCategoriesController : Controller
+    public class AdminDepartmentsController : Controller
     {
         private readonly AppDbContext _context;
 
-        public AdminCategoriesController(AppDbContext context)
+        public AdminDepartmentsController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/AdminCategories
+        // GET: Admin/AdminDepartments
         public async Task<IActionResult> Index(string filter, int pagindex = 1, string sort = "Name")
         {
-            var result = _context.Categories
+            var result = _context.Departments
                     .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter))
@@ -39,70 +39,70 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
             return View(model);
         }
 
-        // GET: Admin/AdminCategories/Details/5
+        // GET: Admin/AdminDepartments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Departments == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var department = await _context.Departments
+                .FirstOrDefaultAsync(m => m.DepartmentId == id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(department);
         }
 
-        // GET: Admin/AdminCategories/Create
+        // GET: Admin/AdminDepartments/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/AdminCategories/Create
+        // POST: Admin/AdminDepartments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,Color,Name,Description")] Category category)
+        public async Task<IActionResult> Create([Bind("DepartmentId,Color,Name,Description")] Department department)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(department);
         }
 
-        // GET: Admin/AdminCategories/Edit/5
+        // GET: Admin/AdminDepartments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Departments == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(department);
         }
 
-        // POST: Admin/AdminCategories/Edit/5
+        // POST: Admin/AdminDepartments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Color,Name,Description")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("DepartmentId,Color,Name,Description")] Department department)
         {
-            if (id != category.CategoryId)
+            if (id != department.DepartmentId)
             {
                 return NotFound();
             }
@@ -111,12 +111,12 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(department);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!DepartmentExists(department.DepartmentId))
                     {
                         return NotFound();
                     }
@@ -127,49 +127,49 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(department);
         }
 
-        // GET: Admin/AdminCategories/Delete/5
+        // GET: Admin/AdminDepartments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Departments == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var department = await _context.Departments
+                .FirstOrDefaultAsync(m => m.DepartmentId == id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(department);
         }
 
-        // POST: Admin/AdminCategories/Delete/5
+        // POST: Admin/AdminDepartments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_context.Departments == null)
             {
-                return Problem("Entity set 'AppDbContext.Categories'  is null.");
+                return Problem("Entity set 'AppDbContext.Departments'  is null.");
             }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var department = await _context.Departments.FindAsync(id);
+            if (department != null)
             {
-                _context.Categories.Remove(category);
+                _context.Departments.Remove(department);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool DepartmentExists(int id)
         {
-          return _context.Categories.Any(e => e.CategoryId == id);
+          return _context.Departments.Any(e => e.DepartmentId == id);
         }
     }
 }

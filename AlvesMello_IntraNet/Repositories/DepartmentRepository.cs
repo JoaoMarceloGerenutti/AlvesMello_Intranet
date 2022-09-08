@@ -4,14 +4,14 @@ using AlvesMello_IntraNet.Repositories.Interfaces;
 
 namespace AlvesMello_IntraNet.Repositories;
 
-public class CategoryRepository : ICategoryRepository
+public class DepartmentRepository : IDepartmentRepository
 {
     private readonly AppDbContext _context;
 
-    public CategoryRepository(AppDbContext context)
+    public DepartmentRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    public IEnumerable<Category> Categories => _context.Categories;
+    public IEnumerable<Department> Departments => _context.Departments;
 }

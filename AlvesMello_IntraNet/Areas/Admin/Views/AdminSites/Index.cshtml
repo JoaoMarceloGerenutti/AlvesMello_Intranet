@@ -62,7 +62,7 @@
 						@Html.DisplayNameFor(model => model.IsActive)
 					</th>
 					<th>
-						@Html.DisplayNameFor(model => model.Category)
+						@Html.DisplayNameFor(model => model.Department)
 					</th>
 					<th>
 
@@ -90,8 +90,8 @@
 						</td>
 						<td style="color: white">
 							<div class="d-flex justify-content-evenly text-center">
-								<div class="rounded-pill p-2 " style="background-color: #@item.Category.Color">
-									@Html.DisplayFor(modelItem => item.Category.Name)
+								<div class="rounded-pill p-2 " style="background-color: #@item.Department.Color">
+									@Html.DisplayFor(modelItem => item.Department.Name)
 								</div>
 							</div>
 						</td>

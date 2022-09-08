@@ -32,7 +32,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddTransient<ISiteRepository, SiteRepository>();
-builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 
 builder.Services.AddAuthorization(options =>
@@ -89,8 +89,8 @@ app.UseEndpoints(endpoints =>
     );
 
     endpoints.MapControllerRoute(
-        name: "filterCategory",
-        pattern: "Site/{action}/{category?}",
+        name: "filterDepartment",
+        pattern: "Site/{action}/{department?}",
         defaults: new { Controller = "Site", Action = "List" }
     );
 

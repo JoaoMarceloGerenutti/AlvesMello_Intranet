@@ -2,7 +2,7 @@
 
 namespace AlvesMello_IntraNet.Repositories.Interfaces;
 
-public interface ICategoryRepository
+public interface IDepartmentRepository
 {
-    IEnumerable<Category> Categories { get; }
+    IEnumerable<Department> Departments { get; }
 }

@@ -1,5 +1,4 @@
 ﻿using AlvesMello_IntraNet.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +11,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    public DbSet<Category> Categories { get; set; }
+    public DbSet<Department> Departments { get; set; }
     public DbSet<Site> Sites { get; set; }
     public DbSet<FavoriteUserSite> FavoriteUserSites { get; set; }
 }

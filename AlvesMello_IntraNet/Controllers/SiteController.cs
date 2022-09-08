@@ -14,30 +14,30 @@ namespace AlvesMello_IntraNet.Controllers
             _siteRepository = siteRepository;
         }
 
-        public IActionResult List(string category)
+        public IActionResult List(string department)
         {
             IEnumerable<Site> sites;
-            string currentCategory = string.Empty;
+            string currentDepartment = string.Empty;
 
-			if (string.IsNullOrEmpty(category))
+			if (string.IsNullOrEmpty(department))
 			{
                 sites = _siteRepository.Sites.OrderBy(s => s.SiteId);
-                currentCategory = "Todos os Sites";
+                currentDepartment = "Todos os Sites";
 			}
 			else
 			{
                 sites = _siteRepository.Sites
-                    .Where(s => s.Category.Name.Equals(category))
+                    .Where(s => s.Department.Name.Equals(department))
                     .OrderBy(s => s.Name
                 );
 
-                currentCategory = category;
+                currentDepartment = department;
 			}
 
             var sitesListViewModel = new SiteListViewModel
             {
                 Sites = sites,
-                CurrentCategory = currentCategory
+                CurrentDepartment = currentDepartment
             };
 
             return View(sitesListViewModel);
@@ -55,12 +55,12 @@ namespace AlvesMello_IntraNet.Controllers
         public ViewResult Search(string searchString)
         {
             IEnumerable<Site> sites;
-            string currentCategory = string.Empty;
+            string currentDepartment = string.Empty;
 
             if (string.IsNullOrEmpty(searchString))
             {
                 sites = _siteRepository.Sites.OrderBy(s => s.SiteId);
-                currentCategory = "Todos os Sites";
+                currentDepartment = "Todos os Sites";
             }
             else
             {
@@ -70,17 +70,17 @@ namespace AlvesMello_IntraNet.Controllers
 
                 if (sites.Any())
                 {
-                    currentCategory = "Sites";
+                    currentDepartment = "Sites";
                 }
                 else
                 {
-                    currentCategory = "Nenhum Site foi Encontrado!";
+                    currentDepartment = "Nenhum Site foi Encontrado!";
                 }
             }
             return View("~/Views/Site/List.cshtml", new SiteListViewModel
             {
                 Sites = sites,
-                CurrentCategory = currentCategory
+                CurrentDepartment = currentDepartment
             });
         }
     }

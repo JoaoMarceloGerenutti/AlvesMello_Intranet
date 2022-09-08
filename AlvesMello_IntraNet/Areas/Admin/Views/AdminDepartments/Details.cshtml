@@ -1,13 +1,13 @@
-﻿@model AlvesMello_IntraNet.Models.Category
+﻿@model AlvesMello_IntraNet.Models.Department
 
 @{
-	ViewData["Title"] = "Detalhes da Categoria";
+	ViewData["Title"] = "Detalhes do Departamento";
 }
 
-<h1>Detalhes da Categoria</h1>
+<h1>Detalhes do Departamento</h1>
 
 <div>
-	<h4>Id da Categoria: @Model?.CategoryId</h4>
+	<h4>Id do Departamento: @Model?.DepartmentId</h4>
 	<hr />
 	<dl class="row">
 		<dt class="col-sm-2">
@@ -29,6 +29,6 @@
 	</dl>
 </div>
 <div>
-	<a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model?.CategoryId">Editar Categoria</a>
+	<a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model?.DepartmentId">Editar Departamento</a>
 	<a class="btn btn-secondary" asp-action="Index">Voltar para a Listagem</a>
 </div>

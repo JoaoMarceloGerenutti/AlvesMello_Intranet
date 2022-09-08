@@ -1,12 +1,12 @@
-﻿@model AlvesMello_IntraNet.Models.Category
+﻿@model AlvesMello_IntraNet.Models.Department
 
 @{
-    ViewData["Title"] = "Deletar Categoria";
+    ViewData["Title"] = "Deletar Departamento";
 }
 
-<h1>Deletar Categoria</h1>
+<h1>Deletar Departamento</h1>
 
-<h3>Você tem certeza que deseja deletar essa Categoria?</h3>
+<h3>Você tem certeza que deseja deletar esse Departamento?</h3>
 <div>
     <hr />
     <dl class="row">
@@ -29,7 +29,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="CategoryId" />
+        <input type="hidden" asp-for="DepartmentId" />
         <input type="submit" value="Deletar" class="btn btn-danger" />
         <a class="btn btn-secondary" asp-action="Index">Voltar para a Listagem</a>
     </form>

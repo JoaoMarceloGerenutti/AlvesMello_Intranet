@@ -15,11 +15,11 @@ public class SiteRepository : ISiteRepository
     }
 
     public IEnumerable<Site> Sites => _context.Sites.
-                                Include(c => c.Category);
+                                Include(c => c.Department);
 
     public IEnumerable<Site> FavoriteSites => _context.Sites.
                                 Where(s => s.IsFavorite).
-                                Include(c => c.Category);
+                                Include(c => c.Department);
 
     public Site GetSiteById(int siteId) => _context.Sites.
                                 FirstOrDefault(s => s.SiteId == siteId);

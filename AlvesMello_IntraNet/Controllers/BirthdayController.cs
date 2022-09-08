@@ -19,7 +19,8 @@ namespace AlvesMello_IntraNet.Controllers
 
 		public IActionResult Index()
 		{
-			var users = _userManager.Users.OrderBy(d => d.BirthDate.Month);
+			var users = _userManager.Users.OrderBy(d => d.BirthDate.Month)
+											.Where(y => y.BirthDate.Year > 1900);
 			return View(users);
 		}
 	}

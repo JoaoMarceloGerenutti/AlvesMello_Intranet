@@ -26,7 +26,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         // GET: Admin/AdminSites
         public async Task<IActionResult> Index(string filter, int pagindex = 1, string sort = "Name")
         {
-            var result = _context.Sites.Include(s => s.Category).AsQueryable();
+            var result = _context.Sites.Include(s => s.Department).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter))
             {
@@ -47,7 +47,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
             }
 
             var site = await _context.Sites
-                .Include(s => s.Category)
+                .Include(s => s.Department)
                 .FirstOrDefaultAsync(m => m.SiteId == id);
             if (site == null)
             {
@@ -60,7 +60,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         // GET: Admin/AdminSites/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name");
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SiteId,Name,Description,ImageUrl,SiteUrl,IsFavorite,IsActive,CategoryId")] Site site)
+        public async Task<IActionResult> Create([Bind("SiteId,Name,Description,ImageUrl,SiteUrl,IsFavorite,IsActive,DepartmentId")] Site site)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", site.CategoryId);
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name", site.DepartmentId);
             return View(site);
         }
 
@@ -94,7 +94,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", site.CategoryId);
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name", site.DepartmentId);
             return View(site);
         }
 
@@ -103,7 +103,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SiteId,Name,Description,ImageUrl,SiteUrl,IsFavorite,IsActive,CategoryId")] Site site)
+        public async Task<IActionResult> Edit(int id, [Bind("SiteId,Name,Description,ImageUrl,SiteUrl,IsFavorite,IsActive,DepartmentId")] Site site)
         {
             if (id != site.SiteId)
             {
@@ -130,7 +130,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", site.CategoryId);
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name", site.DepartmentId);
             return View(site);
         }
 
@@ -143,7 +143,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
             }
 
             var site = await _context.Sites
-                .Include(s => s.Category)
+                .Include(s => s.Department)
                 .FirstOrDefaultAsync(m => m.SiteId == id);
             if (site == null)
             {

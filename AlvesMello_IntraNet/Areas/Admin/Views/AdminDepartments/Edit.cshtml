@@ -1,10 +1,10 @@
-﻿@model AlvesMello_IntraNet.Models.Category
+﻿@model AlvesMello_IntraNet.Models.Department
 
 @{
-	ViewData["Title"] = "Editar Categoria";
+	ViewData["Title"] = "Editar Departamento";
 }
 
-<h1>Editar Categoria</h1>
+<h1>Editar Departamento</h1>
 <hr />
 
 
@@ -13,7 +13,7 @@
 		<div class="col-12">
 			<form asp-action="Edit">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-				<input type="hidden" asp-for="CategoryId" />
+				<input type="hidden" asp-for="DepartmentId" />
 
 				<div class="form-group d-flex">
 					<div>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-1">
 							<div>
-								<a class="btn btn-secondary" asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">Voltar</a>
+								<a class="btn btn-secondary" asp-area="Admin" asp-controller="AdminDepartments" asp-action="Index">Voltar</a>
 							</div>
 						</div>
 					</div>
