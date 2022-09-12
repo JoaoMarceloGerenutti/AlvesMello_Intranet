@@ -25,4 +25,5 @@ public class Department
     public string Description { get; set; }
 
     public List<Site> Sites { get; set; }
+    public List<ApplicationUser> Users { get; set; }
 }

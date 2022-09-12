@@ -56,13 +56,13 @@
 						@Html.DisplayNameFor(model => model.SiteUrl)
 					</th>
 					<th>
+						@Html.DisplayNameFor(model => model.Department)
+					</th>
+					<th>
 						@Html.DisplayNameFor(model => model.IsFavorite)
 					</th>
 					<th>
 						@Html.DisplayNameFor(model => model.IsActive)
-					</th>
-					<th>
-						@Html.DisplayNameFor(model => model.Department)
 					</th>
 					<th>
 
@@ -82,18 +82,18 @@
 						<td>
 							<a href="@item.SiteUrl">@item.SiteUrl</a>
 						</td>
+						<td style="color: white">
+							<div class="d-flex justify-content-evenly text-center">
+								<div class="rounded-pill p-2 " style="background-color: @item.Department.Color">
+									@Html.DisplayFor(modelItem => item.Department.Name)
+								</div>
+							</div>
+						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.IsFavorite)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.IsActive)
-						</td>
-						<td style="color: white">
-							<div class="d-flex justify-content-evenly text-center">
-								<div class="rounded-pill p-2 " style="background-color: #@item.Department.Color">
-									@Html.DisplayFor(modelItem => item.Department.Name)
-								</div>
-							</div>
 						</td>
 						<td>
 							<div class="d-flex flex-wrap justify-content-evenly">

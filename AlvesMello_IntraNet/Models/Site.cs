@@ -16,7 +16,6 @@ public class Site
 
     [StringLength(200, ErrorMessage = "A Descrição não pode Exceder {1} caracteres")]
     [MinLength(20, ErrorMessage = "A Descrição deve ter no Mínimo {1} caracteres")]
-    [Required(ErrorMessage = "A Descrição do Site é Obrigatório!")]
     [Display(Name = "Descrição do Site")]
     public string Description { get; set; }
 

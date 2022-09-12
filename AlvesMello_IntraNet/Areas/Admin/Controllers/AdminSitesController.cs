@@ -54,6 +54,7 @@ namespace AlvesMello_IntraNet.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name", site.DepartmentId);
             return View(site);
         }
 

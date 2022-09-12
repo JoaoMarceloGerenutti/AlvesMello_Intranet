@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AlvesMello_IntraNet.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlvesMello_IntraNet.ViewModels;
 public class ProfileViewModel
@@ -32,6 +33,9 @@ public class ProfileViewModel
     [Required(ErrorMessage = "Informe o Número do seu AM! (localizado em cima do seu Computador)")]
     [Display(Name = "Número do AM")]
     public int AM { get; set; }
+
+    [Display(Name = "Departamento")]
+    public int DepartmentId { get; set; }
 
     [Required(ErrorMessage = "Informe a Senha Atual!")]
     [DataType(DataType.Password)]

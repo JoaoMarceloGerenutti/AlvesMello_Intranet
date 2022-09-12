@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlvesMello_IntraNet.Models;
 
-[Table("SitesCategories")]
+[Table("SitesDepartments")]
 [Keyless]
-public class SiteCategory
+public class SiteDepartment
 {
     [Required(ErrorMessage = "O Id do Site é Obrigatório!")]
     [Display(Name = "Id do Site")]
@@ -16,11 +16,11 @@ public class SiteCategory
     [Display(Name = "Site")]
     public Site Site { get; set; }
 
-    [Required(ErrorMessage = "Id da Categoria é Obrigatório!")]
-    [Display(Name = "Id da Categoria")]
-    public int CategoryId { get; set; }
+    [Required(ErrorMessage = "Id do Departamento é Obrigatório!")]
+    [Display(Name = "Id do Departamento")]
+    public int DepartmentId { get; set; }
 
-    [Required(ErrorMessage = "A Categoria é Obrigatório!")]
-    [Display(Name = "Categoria")]
-    public Category Category { get; set; }
+    [Required(ErrorMessage = "O Departamento é Obrigatório!")]
+    [Display(Name = "Departamento")]
+    public Department Department { get; set; }
 }

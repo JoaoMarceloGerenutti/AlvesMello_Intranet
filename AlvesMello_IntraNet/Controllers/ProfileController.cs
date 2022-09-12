@@ -3,6 +3,7 @@ using AlvesMello_IntraNet.Models;
 using AlvesMello_IntraNet.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 
 namespace AlvesMello_IntraNet.Controllers
@@ -28,6 +29,7 @@ namespace AlvesMello_IntraNet.Controllers
 
         public IActionResult Update()
         {
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name");
             var user = _userManager.FindByNameAsync(User.Identity.Name);
 
             if (user == null)
@@ -46,6 +48,11 @@ namespace AlvesMello_IntraNet.Controllers
                 TelephoneExtension = user.Result.TelephoneExtension,
                 AM = user.Result.AM
             };
+
+            if (user.Result.Department != null)
+            {
+                profileVM.DepartmentId = user.Result.Department.DepartmentId;
+            }
 
             if (string.IsNullOrWhiteSpace(profileVM.Photo))
             {
@@ -74,6 +81,7 @@ namespace AlvesMello_IntraNet.Controllers
                 updateUser.PhoneNumber = profileVM.PhoneNumber;
                 updateUser.TelephoneExtension = profileVM.TelephoneExtension;
                 updateUser.AM = profileVM.AM;
+                updateUser.Department = await _context.Departments.FindAsync(profileVM.DepartmentId);
 
                 if (!string.IsNullOrEmpty(profileVM.NewPassword))
                 {
@@ -87,6 +95,7 @@ namespace AlvesMello_IntraNet.Controllers
                 ModelState.AddModelError("", "Senha Atual Inválida!");
             }
 
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name");
             return View(profileVM);
         }
 

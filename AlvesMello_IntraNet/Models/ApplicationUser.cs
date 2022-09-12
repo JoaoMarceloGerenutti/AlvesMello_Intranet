@@ -9,4 +9,5 @@ public class ApplicationUser : IdentityUser
     public string Photo { get; set; }
     public int TelephoneExtension { get; set; }
     public int AM { get; set; }
+    public Department Department { get; set; }
 }
