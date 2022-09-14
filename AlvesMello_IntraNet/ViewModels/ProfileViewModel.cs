@@ -1,5 +1,4 @@
-﻿using AlvesMello_IntraNet.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AlvesMello_IntraNet.ViewModels;
 public class ProfileViewModel

@@ -1,0 +1,106 @@
+﻿@model TelephoneExtensionViewModel
+
+<div class="container">
+	<table class="tg table">
+		<thead>
+			<tr>
+				<th class="tg-c3ow" colspan="3">
+					<h2>Lista de Ramal A&M</h2>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-white" style="background-color: #430c33">
+				<td class="tg-wp8o col-sm-4 col-md-4 col-lg-4 p-1">Nome</td>
+				<td class="tg-wp8o col-sm-4 col-md-4 col-lg-4 p-1">Ramal</td>
+				<td class="tg-wp8o col-sm-4 col-md-4 col-lg-4 p-1">Departamento</td>
+			</tr>
+			@{
+				var firstIteration = true;
+				for (var j = 0; j < Model.UsersByDepartment.Count(); j++)
+				{
+					foreach (var usersDepartment in Model.UsersByDepartment[j].OrderBy(u => u.FullName))
+					{
+						if (firstIteration == true)
+						{
+							var departmentName = "Sem Departamento";
+							if (usersDepartment.Department != null)
+							{
+								departmentName = usersDepartment.Department.Name;
+							}
+
+							var departmentLenght = Model.UsersByDepartment[j].Count();
+							<tr>
+								<td class="tg-0lax col-sm-4 col-md-4 col-lg-4 p-1">@usersDepartment.FullName</td>
+								<td class="tg-c3ow col-sm-4 col-md-4 col-lg-4 p-1">@usersDepartment.TelephoneExtension</td>
+								<td class="tg-9wq8 col-sm-4 col-md-4 col-lg-4 p-1" rowspan="@departmentLenght">@departmentName</td>
+							</tr>
+							firstIteration = false;
+						}
+						else
+						{
+							<tr>
+								<td class="tg-0lax col-sm-4 col-md-4 col-lg-4 p-1">@usersDepartment.FullName</td>
+								<td class="tg-c3ow col-sm-4 col-md-4 col-lg-4 p-1">@usersDepartment.TelephoneExtension</td>
+							</tr>
+						}
+					}
+					<tr>
+						<td class="tg-8jgo" colspan="3"></td>
+					</tr>
+					firstIteration = true;
+				}
+			}
+		</tbody>
+	</table>
+</div>
+
+<style type="text/css">
+	.tg {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+		.tg td, .tg th {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 18px;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg .tg-0lax {
+			border-color: black;
+			font-size: 20px;
+			text-align: start;
+			vertical-align: middle;
+		}
+
+		.tg .tg-wp8o {
+			border-color: black;
+			font-size: 20px;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.tg .tg-9wq8 {
+			border-color: black;
+			font-size: 28px;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.tg .tg-c3ow {
+			border-color: black;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.tg .tg-8jgo {
+			border-color: #ffffff;
+			border-bottom-color: black;
+		}
+</style>
