@@ -4,6 +4,7 @@ using AlvesMello_IntraNet.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace AlvesMello_IntraNet.Controllers
@@ -27,10 +28,11 @@ namespace AlvesMello_IntraNet.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public IActionResult Update()
+        public async Task<IActionResult> UpdateAsync()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name");
-            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await _context.Users
+                                .Include(u => u.Department)
+                                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
             if (user == null)
             {
@@ -39,20 +41,22 @@ namespace AlvesMello_IntraNet.Controllers
 
             var profileVM = new ProfileViewModel
             {
-                Id = user.Result.Id,
-                Photo = user.Result.Photo,
-                FullName = user.Result.FullName,
-                BirthDate = user.Result.BirthDate,
-                PhoneNumber = user.Result.PhoneNumber,
-                Email = user.Result.UserName,
-                TelephoneExtension = user.Result.TelephoneExtension,
-                AM = user.Result.AM
+                Id = user.Id,
+                Photo = user.Photo,
+                FullName = user.FullName,
+                BirthDate = user.BirthDate,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.UserName,
+                TelephoneExtension = user.TelephoneExtension,
+                AM = user.AM
             };
 
-            if (user.Result.Department != null)
+            if (user.Department != null)
             {
-                profileVM.DepartmentId = user.Result.Department.DepartmentId;
+                profileVM.DepartmentId = user.Department.DepartmentId;
             }
+
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name", profileVM.DepartmentId);
 
             if (string.IsNullOrWhiteSpace(profileVM.Photo))
             {
@@ -67,14 +71,16 @@ namespace AlvesMello_IntraNet.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name");
                 return View(profileVM);
             }
 
+            ApplicationUser updateUser = null;
             if (await VerifyUserPassword(profileVM.Password))
             {
                 // Update profile information on database.
-                ApplicationUser updateUser = _context.Users
-                                                .FirstOrDefault(u => u.Id == profileVM.Id);
+                updateUser = await _context.Users
+                                                .FirstOrDefaultAsync(u => u.Id == profileVM.Id);
 
                 updateUser.FullName = profileVM.FullName;
                 updateUser.BirthDate = profileVM.BirthDate;
@@ -88,14 +94,10 @@ namespace AlvesMello_IntraNet.Controllers
                     await _userManager.ChangePasswordAsync(updateUser, profileVM.Password, profileVM.NewPassword);
                 }
 
+                ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name", updateUser.Department.DepartmentId);
                 await _context.SaveChangesAsync();
             }
-            else
-            {
-                ModelState.AddModelError("", "Senha Atual Inválida!");
-            }
 
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "Name");
             return View(profileVM);
         }
 
